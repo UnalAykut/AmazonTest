@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="AmazonTestSuite">
+    <test name="AmazonLoginTest">
+        <parameter name="browser" value="chrome" />
+        <parameter name="searchText" value="laptop" />
+        <parameter name="index" value="3" />
+        <classes>
+            <class name="com.amazon.test.AmazonTest" />
+            <class name="com.amazon.test.SearchResultPageTest" />
+        </classes>
+    </test>
+</suite>
+

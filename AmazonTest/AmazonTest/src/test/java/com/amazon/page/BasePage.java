@@ -23,7 +23,20 @@ public class BasePage {
             //eğer cookie yoksa devam et
             System.out.println("Cookie bulunamadı");
         }
-
+    }
+    protected void click(WebElement element) throws Exception {
+        try {
+            element.click();
+        }catch (Exception e){
+            throw new Exception("Elemente tıklanamadı"+e.getMessage());
+        }
+    }
+    protected String getText(WebElement element) throws Exception {
+        try {
+            return element.getText();
+        }catch (Exception e){
+            throw new Exception("Element metni alınamadı:"+e.getMessage());
+        }
     }
 
 

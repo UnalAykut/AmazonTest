@@ -5,7 +5,7 @@
         <parameter name="searchText" value="laptop" /><!--Arama yapılacak text değerini buradan yolluyoruz-->
         <parameter name="index" value="3" /><!--sayfadaki gelen ögelerin hangi index seçilecekse onu gönderiyoruz-->
         <classes>
-            <class name="com.amazon.tests.LoginPageTest"></class>
+            <class name="com.amazon.test.LoginPageTest"></class>
             <!-- çalıştırmak istediğiniz testi classes içine yazınız.
             Diğer testleri bu şekilde yorum satırına alabilirsiniz-->
             <!-- <class name="com.amazon.test.AmazonTest" />

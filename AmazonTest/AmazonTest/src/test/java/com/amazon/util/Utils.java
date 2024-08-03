@@ -1,6 +1,7 @@
 package com.amazon.util;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,4 +28,18 @@ public class Utils {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT));
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
+
+    public static void scrollToElement(WebDriver driver, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollToElementUntilVisible(WebDriver driver, WebElement element) throws InterruptedException {
+        while (!element.isDisplayed()) {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0,250)");
+            waitForSeconds(1);
+        }
+    }
+
 }

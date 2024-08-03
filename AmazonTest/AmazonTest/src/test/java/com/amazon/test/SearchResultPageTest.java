@@ -17,7 +17,7 @@ public class SearchResultPageTest extends BaseTest {
     }
     @Test(dependsOnMethods = "com.amazon.test.AmazonTest.searchTest")
     @Parameters({"searchText", "index"})
-    public void searchResultDataTest(String searchText,int index) {
+    public void searchResultDataTest(String searchText,int index) throws InterruptedException {
         navigationBarPage.inputSearchTextBox(searchText );
         navigationBarPage.clickSubmitButton();
         searchResultPage.clickItemSearchResultsData(index);

@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 public class NavigationBarPage extends BasePage {
 
     public NavigationBarPage(WebDriver driver) {
-        super(driver);
+        super( driver );
     }
 
     @FindBy(id = "twotabsearchtextbox")
@@ -28,25 +28,37 @@ public class NavigationBarPage extends BasePage {
     @FindBy(id = "searchDropdownBox")
     private WebElement categoryDropdown;
 
+    @FindBy(id = "nav-link-accountList-nav-line-1")
+    private WebElement accountName;
+
     public void inputSearchTextBox(String searchText) {
-        Utils.waitForElementToBeVisible(driver, searchTextBox).sendKeys(searchText);
+        Utils.waitForElementToBeVisible( driver, searchTextBox ).sendKeys( searchText );
     }
 
     public void clickSubmitButton() {
-        Utils.waitForElementToBeClickable(driver, submitButton).click();
+        Utils.waitForElementToBeClickable( driver, submitButton ).click();
     }
 
     public void onHoverLoginAccountListButton() {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(Utils.waitForElementToBeVisible(driver, loginAccountListButton)).perform();
+        Actions actions = new Actions( driver );
+        actions.moveToElement( Utils.waitForElementToBeVisible( driver, loginAccountListButton ) ).perform();
     }
 
     public void clickLoginAccountListButton() {
-        Utils.waitForElementToBeClickable(driver, loginAccountListButton).click();
+        Utils.waitForElementToBeClickable( driver, loginAccountListButton ).click();
     }
 
     public void selectCategory(String category) {
-        Select dropdown = new Select(Utils.waitForElementToBeVisible(driver, categoryDropdown));
-        dropdown.selectByVisibleText(category);
+        Select dropdown = new Select( Utils.waitForElementToBeVisible( driver, categoryDropdown ) );
+        dropdown.selectByVisibleText( category );
+    }
+
+    public boolean isLoginSuccessful() {
+        try {
+            Utils.waitForElementToBeVisible( driver, accountName );
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -17,7 +17,7 @@ public class LoginSearchTest extends LoginBaseTest {
 
     @Test(priority = 1)
     public void searchItemTest() throws InterruptedException {
-        int index =20;
+        int index =15;
         if (!isLoginSuccessful()) {
             throw new IllegalStateException("User is not logged in. Login is required to perform this test.");
         }
@@ -26,8 +26,13 @@ public class LoginSearchTest extends LoginBaseTest {
         Utils.waitForSeconds( 3 );
         String actualData=searchResultPage.actualProductName(index);
         searchResultPage.clickItemSearchResultsData(index); // Belirtilen indexteki ürünü tıklama
+        Utils.waitForSeconds( 3 );
         String expectedData = productPage.expectedProductName();
-        Utils.nameControl(actualData, expectedData);
+        if(Utils.nameControl(actualData, expectedData)){
+            System.out.println("Ürün eşleşti");
+        }else {
+            System.out.println("Ürün eşleşmedi.");
+        }
         Utils.waitForSeconds( 3 );
     }
 }

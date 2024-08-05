@@ -6,17 +6,15 @@ import com.amazon.page.LoginPage;
 import com.amazon.page.NavigationBarPage;
 import com.amazon.util.ConfigReader;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
+
 public class LoginBaseTest {
     protected WebDriver driver;
     protected NavigationBarPage navigationBarPage;
     private BasePage basePage;
     private LoginPage loginPage;
 
-    @BeforeClass
+    @BeforeSuite
     @Parameters("browser")
     public void setUp(@Optional("chrome") String browser) {
         driver = DriverManager.getDriver(browser);
@@ -48,7 +46,7 @@ public class LoginBaseTest {
         return navigationBarPage.isLoginSuccessful();
     }
 
-    @AfterClass
+    @AfterSuite
     public void tearDown() {
         DriverManager.quitDriver();
     }

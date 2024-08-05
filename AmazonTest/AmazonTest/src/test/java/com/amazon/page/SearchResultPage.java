@@ -30,7 +30,8 @@ public class SearchResultPage extends BasePage {
         boolean elements = searchResultsData.isEmpty();
         if (!elements && dataIndex < searchResultsData.size()) {
             Utils.scrollToElementUntilVisible( driver, searchResultsData.get( dataIndex ) );
-            String name=searchResultsData.get(dataIndex).getText().replaceFirst("\\n62[\\s\\S]*", "").trim();
+            String name=searchResultsData.get(dataIndex).getText().split("\\n")[0].trim();
+            System.out.println(name);
             return name;
         }
         throw new IllegalArgumentException( "Data bulunamadı, index değeri yanlış girilmiş olabilir.Ürün isimleri eşleşmemiş olabilir." );

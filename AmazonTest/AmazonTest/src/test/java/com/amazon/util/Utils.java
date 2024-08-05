@@ -49,11 +49,12 @@ public class Utils {
         }
     }
 
-    public static void nameControl(String expectedData,String actualData){
+    public static boolean nameControl(String expectedData,String actualData){
         if(expectedData.equals( actualData )){
-            System.out.println("Doğru Ürüne gidildi.");
+            return true;
         }else {
-        System.out.println("Ürün eşleşmedi.");}
+        return false;
+        }
     }
 
 

@@ -54,11 +54,12 @@ public class NavigationBarPage extends BasePage {
     }
 
     public boolean isLoginSuccessful() {
-        try {
-            Utils.waitForElementToBeVisible( driver, accountName );
-            return true;
-        } catch (Exception e) {
-            return false;
+        String actualData="Merhaba, Giriş yapın";
+        String expectedData=  Utils.waitForElementToBeVisible( driver,accountName ).getText();
+        if(expectedData.equals( actualData )){
+                return false;
         }
+            return true;
+
     }
 }

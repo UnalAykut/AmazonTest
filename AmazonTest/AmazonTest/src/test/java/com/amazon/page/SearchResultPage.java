@@ -7,26 +7,35 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class SearchResultPage extends BasePage{
+public class SearchResultPage extends BasePage {
     public SearchResultPage(WebDriver driver) {
         super( driver );
     }
+
     @FindBy(xpath = "//div[contains(@class, 's-result-item') and @data-index]")
     private List<WebElement> searchResultsData;
 
 
-
-
-    public void clickItemSearchResultsData(int index) throws InterruptedException {
+    public void clickItemSearchResultsData(int dataIndex) throws InterruptedException {
         boolean elements = searchResultsData.isEmpty();
-        if (!elements && index < searchResultsData.size()) {
-            Utils.scrollToElementUntilVisible(driver, searchResultsData.get(index));
-            searchResultsData.get(index).click();
+        if (!elements && dataIndex < searchResultsData.size()) {
+            Utils.scrollToElementUntilVisible( driver, searchResultsData.get( dataIndex ) );
+            searchResultsData.get( dataIndex ).click();
         } else {
-            throw new IllegalArgumentException("Data bulunamadı, index değeri yanlış girilmiş olabilir.");
+            throw new IllegalArgumentException( "Data bulunamadı, index değeri yanlış girilmiş olabilir." );
         }
     }
 
+    public String actualProductName(int dataIndex) throws InterruptedException {
+        boolean elements = searchResultsData.isEmpty();
+        if (!elements && dataIndex < searchResultsData.size()) {
+            Utils.scrollToElementUntilVisible( driver, searchResultsData.get( dataIndex ) );
+            String name=searchResultsData.get(dataIndex).getText().replaceFirst("\\n62[\\s\\S]*", "").trim();
+            return name;
+        }
+        throw new IllegalArgumentException( "Data bulunamadı, index değeri yanlış girilmiş olabilir.Ürün isimleri eşleşmemiş olabilir." );
 
+    }
 
 }
+

@@ -1,8 +1,10 @@
 package com.amazon.test.login;
+
 import com.amazon.driver.DriverManager;
 import com.amazon.page.BasePage;
 import com.amazon.page.LoginPage;
 import com.amazon.page.NavigationBarPage;
+import com.amazon.util.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -30,10 +32,16 @@ public class LoginBaseTest {
     }
 
     protected void performLogin() {
+        ConfigReader configReader = new ConfigReader();
+        String email = configReader.getProperty("email");
+        String password = configReader.getProperty("password");
+        if (email == null || password == null) {
+            throw new IllegalArgumentException("Email veya password boş.");
+        }
         navigationBarPage.clickLoginAccountListButton();
-        loginPage.inputEmail("");//emailiniz ile deneyebilirsiniz
+        loginPage.inputEmail(email);//emailiniz ile deneyebilirsiniz
         loginPage.clickContinueButton();
-        loginPage.inputPassword("");//şifreniz ile deneyebilirsiniz
+        loginPage.inputPassword(password);//şifreniz ile deneyebilirsiniz
         loginPage.clickLoginButton();
     }
     protected boolean isLoginSuccessful() {

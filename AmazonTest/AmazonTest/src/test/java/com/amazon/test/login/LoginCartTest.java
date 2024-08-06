@@ -1,7 +1,9 @@
 package com.amazon.test.login;
 
+import com.amazon.page.BasePage;
 import com.amazon.page.CartPage;
 import com.amazon.page.ProductPage;
+import com.amazon.page.SearchResultPage;
 import com.amazon.util.Utils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -9,14 +11,20 @@ import org.testng.annotations.Test;
 public class LoginCartTest extends LoginBaseTest{
     private ProductPage productPage;
     private CartPage cartPage;
-
+    private SearchResultPage searchResultPage;
     @BeforeClass
     public void pageSetUp() {
-        cartPage=new CartPage( driver );
-        productPage=new ProductPage( driver );
+        cartPage= BasePage.getInstance( CartPage.class,driver );
+        productPage=BasePage.getInstance( ProductPage.class,driver );
+        searchResultPage=BasePage.getInstance( SearchResultPage.class,driver );
     }
-    @Test(dependsOnMethods = {"com.amazon.test.login.LoginSearchTest.searchItemTest"})
-    public void addToCartTest(){
+    @Test()
+    public void addToCartTest() throws InterruptedException {
+        int index=12;
+        navigationBarPage.inputSearchTextBox("laptop");
+        navigationBarPage.clickSubmitButton();
+        Utils.waitForSeconds( 3 );
+        searchResultPage.clickItemSearchResultsData(index); //
         productPage.addCart();
         String actualData="Sepete Eklendi";
         if(Utils.nameControl( cartPage.addTextControl(), actualData)){

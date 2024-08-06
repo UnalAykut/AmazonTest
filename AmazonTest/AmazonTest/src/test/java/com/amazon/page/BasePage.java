@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
+    private static BasePage instance;
     @FindBy(id = "sp-cc-accept")
     private WebElement acceptCookie;
     protected WebDriver driver;
@@ -15,6 +16,17 @@ public class BasePage {
         //her sayfada FindBy anatasyonu kullınalacağınan dolayı burada tanımladık.
         PageFactory.initElements( driver,this );
     }
+    public static <T extends BasePage> T getInstance(Class<T> pageClass, WebDriver driver) {
+        T page = null;
+        try {
+            page = pageClass.getDeclaredConstructor(WebDriver.class).newInstance(driver);
+            PageFactory.initElements(driver, page);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return page;
+    }
+
 
     public void clickAcceptCookie(){
         try {
